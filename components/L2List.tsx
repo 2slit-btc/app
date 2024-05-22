@@ -147,7 +147,7 @@ export default function L2List({ l2s, columns }: { l2s: L2[], columns: L2Columns
   )
 
   const sortedItems = React.useMemo(() => {
-    return l2s.sort((a, b) => {
+    return [...l2s].sort((a, b) => {
       const first = a[sortDescriptor.column as keyof L2] as number;
       const second = b[sortDescriptor.column as keyof L2] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
