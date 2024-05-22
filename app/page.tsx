@@ -33,7 +33,7 @@ async function getData(): Promise<ChainDataResponse> {
 
 export default async function Home() {
 	const l2s = await getData()
-	console.log(l2s)
+	// console.log(l2s)
 
 	return (
 		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
