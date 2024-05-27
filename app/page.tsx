@@ -1,9 +1,3 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code"
-import { button as buttonStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
-import { GithubIcon } from "@/components/icons";
 import L2List, { L2 } from '@/components/L2List';
 
 type ChainData = L2 & {
@@ -12,28 +6,28 @@ type ChainData = L2 & {
 	explorer_url: string;
 	is_deleted: boolean;
 	modifier: string;
-	mtime: string;
 }
 type ChainDataResponse = ChainData[]
 
-async function getData(): Promise<ChainDataResponse> {
+async function fetchData(): Promise<ChainDataResponse> {
 	console.log(process.env.API_BASE_URL + '/chain_data')
 
-	const res = await fetch(process.env.API_BASE_URL + '/chain_data')
+	const res = await fetch(process.env.API_BASE_URL + '/chain_data', { next: { revalidate: 6 } })
 
 	if (!res.ok) {
 		// TODO use history data
 		console.error('Failed to fetch data', res.body)
-
-		throw new Error('Failed to fetch data')
+		return []
 	}
 
 	return await res.json()
 }
 
 export default async function Home() {
-	const l2s = await getData()
-	// console.log(l2s)
+	const l2s = await fetchData();
+	console.log(l2s.find(l2 => l2.name === 'BEVM')?.mtime)
+
+	if (!l2s) return <div>Loading...</div>
 
 	return (
 		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, ChipProps, SortDescriptor } from "@nextui-org/react";
+import { formatToUserLocale } from '@/utils/utils';
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -75,6 +76,7 @@ export interface L2 {
    */
   tvl_price_usd: number;
   twitter_url: string;
+  mtime: string;
 }
 
 export type L2Columns = {
@@ -156,9 +158,17 @@ export default function L2List({ l2s, columns }: { l2s: L2[], columns: L2Columns
     });
   }, [sortDescriptor, l2s])
 
+  const bottomContent = React.useMemo(() => (
+    <div className="flex justify-end gap-2">
+      updated at {formatToUserLocale(l2s.map(l2 => l2.mtime).sort().reverse()[0])}
+    </div>
+  ), [l2s])
+
   return (
     <Table aria-label="2slit.btc table" classNames={classNames}
       onSortChange={setSortDescriptor}
+      bottomContent={bottomContent}
+      bottomContentPlacement="outside"
       removeWrapper>
       <TableHeader columns={columns}>
         {(column) => (
