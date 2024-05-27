@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, ChipProps, SortDescriptor } from "@nextui-org/react";
-import { formatToUserLocale } from '@/utils/utils';
+import { formatToUserLocale } from '@/utils/clientUtils';
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",

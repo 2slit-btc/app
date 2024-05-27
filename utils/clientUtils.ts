@@ -1,3 +1,4 @@
+"use client";
 /**
  * 将 ISO 8601 日期字符串转换为用户所在区域习惯的日期格式
  * @param {string} isoString - ISO 8601 格式的日期字符串
@@ -8,7 +9,7 @@ export function formatToUserLocale(isoString: string) {
   const date = new Date(isoString);
 
   // 获取用户所在区域的语言设置
-  const userLocale = navigator.language || 'en-US';
+  const userLocale = typeof window !== 'undefined' ? window.navigator.language : 'en-US';
 
   // 使用 Intl.DateTimeFormat 格式化 Date 对象
   const options: Intl.DateTimeFormatOptions = {
