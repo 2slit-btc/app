@@ -1,4 +1,5 @@
-"use client";
+'use client'
+
 /**
  * 将 ISO 8601 日期字符串转换为用户所在区域习惯的日期格式
  * @param {string} isoString - ISO 8601 格式的日期字符串
@@ -6,10 +7,11 @@
  */
 export function formatToUserLocale(isoString: string) {
   // 解析时间字符串为 Date 对象
-  const date = new Date(isoString);
+  const date = new Date(isoString)
 
   // 获取用户所在区域的语言设置
-  const userLocale = typeof window !== 'undefined' ? window.navigator.language : 'en-US';
+  const userLocale =
+    typeof window !== 'undefined' ? window.navigator.language : 'en-US'
 
   // 使用 Intl.DateTimeFormat 格式化 Date 对象
   const options: Intl.DateTimeFormatOptions = {
@@ -20,7 +22,11 @@ export function formatToUserLocale(isoString: string) {
     minute: '2-digit',
     second: '2-digit',
     // timeZoneName: 'short' // 可选: 显示时区信息
-  };
+  }
 
-  return new Intl.DateTimeFormat(userLocale, options).format(date);
+  return new Intl.DateTimeFormat(userLocale, options).format(date)
+}
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
 }
