@@ -17,3 +17,7 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-default-400;
 }
+
+.l2s {
+  max-height: calc(100vh - 15rem);
+}
