@@ -1,5 +1,5 @@
 import L2s from '@/components/L2s/L2s'
-import type { ChainData } from '@/types'
+import type { ChainData, ColumnSetting } from '@/types'
 
 type ChainDataResponse = ChainData[]
 
@@ -25,45 +25,45 @@ export default async function Home() {
 
   if (!l2s) return <div>Loading...</div>
 
-  const columns = [
+  const columns: ColumnSetting[] = [
     {
       name: 'Name',
       uid: 'name',
       sortable: true,
       align: 'start',
-      valueAlign: 'left',
+      width: 'xl',
     },
     {
       name: 'Stage',
       uid: 'stage',
-      sortable: true,
-      align: 'start',
-      valueAlign: 'center',
+      sortable: false,
+      align: 'center',
+    },
+    {
+      name: 'Token',
+      uid: 'native_token_name',
+      sortable: false,
+      align: 'center',
+      width: 24,
     },
     {
       name: 'Price(USD)',
       uid: 'price_usd',
-      sortable: true,
-      align: 'center',
-      valueAlign: 'right',
+      sortable: false,
+      align: 'end',
     },
     {
       name: 'TVL(USD)',
       uid: 'tvl_price_usd',
       sortable: true,
       align: 'end',
-      valueAlign: 'right',
     },
   ]
 
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+    <section className="flex flex-col items-center justify-center gap-4">
       <div className="inline-block w-full text-center justify-center">
         <L2s items={l2s} columns={columns} />
-        {/* <L2List
-          columns={}
-          l2s={l2s}
-        /> */}
       </div>
     </section>
   )

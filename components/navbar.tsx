@@ -1,4 +1,4 @@
-import { Link } from '@nextui-org/link'
+import { Link } from '@nextui-org/react'
 import {
   NavbarBrand,
   NavbarContent,
@@ -7,7 +7,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
   Navbar as NextUINavbar,
-} from '@nextui-org/navbar'
+} from '@nextui-org/react'
 
 import { link as linkStyles } from '@nextui-org/theme'
 

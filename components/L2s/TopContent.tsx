@@ -69,8 +69,8 @@ const TopContent = ({
           <Dropdown>
             <DropdownTrigger className="hidden sm:flex">
               <Button
-                endContent={<ChevronDownIcon className="text-small" />}
-                size="sm"
+                endContent={<ChevronDownIcon className="text-base" />}
+                size="md"
                 variant="flat"
               >
                 Stage
@@ -96,8 +96,8 @@ const TopContent = ({
           <Dropdown>
             <DropdownTrigger className="hidden sm:flex">
               <Button
-                endContent={<ChevronDownIcon className="text-small" />}
-                size="sm"
+                endContent={<ChevronDownIcon className="text-base" />}
+                size="md"
                 variant="flat"
               >
                 Columns

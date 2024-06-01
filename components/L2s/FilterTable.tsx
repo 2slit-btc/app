@@ -1,8 +1,9 @@
 'use client'
-import type { ColumnSetting } from '@/types'
+import type { ColumnSetting, L2 } from '@/types'
 import { formatToUserLocale } from '@/utils/clientUtils'
 import type { Selection } from '@nextui-org/react'
 import {
+  Avatar,
   Chip,
   Table,
   TableBody,
@@ -10,18 +11,19 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-  User,
   type ChipProps,
   type SortDescriptor,
 } from '@nextui-org/react'
+import clsx from 'clsx'
 import React, { type Key } from 'react'
+import { ExplorerIcon, GithubIcon, TwitterIcon } from '../icons'
 import BottomContent from './BottomContent'
 import TopContent from './TopContent'
 
-const statusColorMap: Record<string, ChipProps['color']> = {
+const stageColorMap: Record<string, ChipProps['color']> = {
   Mainnet: 'success',
-  paused: 'danger',
-  'to be done': 'warning',
+  'Pre-Testnet': 'warning',
+  Testnet: 'primary',
 }
 
 type FilterTableProps = {
@@ -54,7 +56,7 @@ const L2Table = ({
 }: FilterTableProps) => {
   const classNames = React.useMemo(
     () => ({
-      wrapper: ['max-h-screen', 'pt-0 pr-1 pl-0', 'shadow-none'],
+      wrapper: ['l2s', 'pt-0 pr-1 pl-0', 'shadow-none'],
       thead: ['[&>tr]:first:shadow-none [&>tr>th]:first:py-5'],
       // tr: ['[&>th]:first:rounded-none', '[&>th]:last:rounded-none'],
       th: ['text-default-800', 'text-base font-medium'],
@@ -121,56 +123,95 @@ const L2Table = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const renderCell = React.useCallback(
-    (item: Record<string, any>, columnKey: React.Key) => {
-      const cellValue = item[columnKey]
-      switch (columnKey) {
-        case 'name':
-          return (
-            <User
-              avatarProps={{ radius: 'full', size: 'sm', src: item.icon_url }}
-              classNames={{ description: 'text-default-500' }}
-              description={item.native_token_name}
-              name={cellValue}
-            >
-              {item.name}
-            </User>
-          )
-        case 'status':
-          return (
-            <Chip
-              className="capitalize border-none gap-1 text-default-600"
-              color={statusColorMap[item.stage]}
-              size="sm"
-              variant="flat"
-            >
-              {cellValue}
-            </Chip>
-          )
-        case 'tvl_price_usd':
-          return (
-            <div className="relative flex gap-2">
-              ${Number(cellValue).toFixed(2)}
+  const renderCell = React.useCallback((item: L2, columnKey: React.Key) => {
+    const cellValue = item[columnKey as keyof L2]
+    switch (columnKey) {
+      case 'name':
+        return (
+          <div className="horizontal">
+            {item.icon_url && (
+              <Avatar
+                size="lg"
+                src={item.icon_url}
+                aria-label={'Icon of ' + item.name}
+              />
+            )}
+            <div className="vertical items-start gap-0.5 pl-2.5">
+              <div className="text-lg">{item.name}</div>
+              <div className="horizontal gap-1 text-tiny text-default-500 ">
+                {item.twitter_url && (
+                  <a
+                    href={item.twitter_url}
+                    aria-label="Twitter URL"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <TwitterIcon size={24} />
+                  </a>
+                )}
+                {item.github_url && (
+                  <a
+                    href={item.github_url}
+                    aria-label="Github URL"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <GithubIcon size={24} />
+                  </a>
+                )}
+                {item.explorer_url && (
+                  <a
+                    href={item.explorer_url}
+                    aria-label="Explorer URL"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <ExplorerIcon size={24} />
+                  </a>
+                )}
+              </div>
             </div>
-          )
-        case 'price_usd':
-          return (
-            <div className="relative flex gap-2">
-              ${Number(cellValue).toFixed(2)}
-            </div>
-          )
-        default:
-          return cellValue
-      }
-    },
-    [],
-  )
+          </div>
+        )
+      case 'native_token_name':
+        return (
+          <div className="flex justify-center overflow-hidden">
+            {item.native_token_name}
+          </div>
+        )
+      case 'stage':
+        return (
+          <Chip
+            className="capitalize border-none"
+            color={stageColorMap[item.stage]}
+            size="sm"
+            variant="flat"
+          >
+            {cellValue}
+          </Chip>
+        )
+      case 'price_usd':
+        return (
+          <div className="relative flex justify-end">
+            ${Number(cellValue).toFixed(2)}
+          </div>
+        )
+      case 'tvl_price_usd':
+        return (
+          <div className="relative flex justify-end">
+            ${Number(cellValue).toFixed(2)}
+          </div>
+        )
+      default:
+        return cellValue
+    }
+  }, [])
 
   return (
     <Table
       isHeaderSticky
       selectionMode="single"
-      aria-label="Example table with custom cells, pagination and sorting"
+      aria-label="Bitcoin Layer 2 Table"
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
       classNames={classNames}
@@ -183,17 +224,28 @@ const L2Table = ({
         {column => (
           <TableColumn
             key={column.uid}
-            align="start"
             allowsSorting={column.sortable}
+            className={clsx(
+              'text-' + column.align,
+              column.width && 'max-w-' + column.width,
+            )}
           >
-            {column.name}
+            <div className="inline-block">{column.name}</div>
           </TableColumn>
         )}
       </TableHeader>
       <TableBody emptyContent={'No users found'} items={sortedItems}>
         {item => (
           <TableRow key={item.id}>
-            {columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            {columnKey => (
+              <TableCell
+                className={clsx(
+                  columnKey === 'native_token_name' && 'max-w-24',
+                )}
+              >
+                {renderCell(item, columnKey)}
+              </TableCell>
+            )}
           </TableRow>
         )}
       </TableBody>

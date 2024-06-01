@@ -15,6 +15,7 @@ export type L2 = {
   fee_usd: number | null
   github_url: string | null
   icon_url: string | null
+  explorer_url: string | null
   /**
    * ID
    */
@@ -74,7 +75,6 @@ export type L2 = {
 export type ChainData = L2 & {
   creator: string | null
   ctime: string
-  explorer_url: string | null
   is_deleted: boolean
   modifier: string | null
 }
@@ -83,4 +83,35 @@ export type ColumnSetting = {
   name: string
   uid: string
   sortable: boolean
+  align?: 'start' | 'center' | 'end'
+  width?:
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 16
+    | 20
+    | 24
+    | 32
+    | 40
+    | 48
+    | 56
+    | 60
+    | 64
+    | 72
+    | 80
+    | 96
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
 }

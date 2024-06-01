@@ -5,7 +5,13 @@ import { type SortDescriptor } from '@nextui-org/react'
 import React from 'react'
 import FilterTable from './FilterTable'
 
-const INITIAL_VISIBLE_COLUMNS = ['name', 'stage', 'tvl_price_usd', 'price_usd']
+const INITIAL_VISIBLE_COLUMNS = [
+  'name',
+  'stage',
+  'native_token_name',
+  'tvl_price_usd',
+  'price_usd',
+]
 export default function L2s({
   items,
   columns,
