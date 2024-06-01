@@ -192,13 +192,13 @@ const L2Table = ({
         )
       case 'price_usd':
         return (
-          <div className="relative flex justify-end">
+          <div className="flex justify-end font-mono">
             {Number(cellValue).toFixed(2)}
           </div>
         )
       case 'tvl_price_usd':
         return (
-          <div className="relative flex justify-end">
+          <div className="flex justify-end font-bold font-mono">
             {cellValue ? toMillionWithCommas(cellValue) : '-'}
           </div>
         )
@@ -236,7 +236,7 @@ const L2Table = ({
       </TableHeader>
       <TableBody emptyContent={'No users found'} items={sortedItems}>
         {item => (
-          <TableRow key={item.id}>
+          <TableRow key={item.id} className="text-default-800">
             {columnKey => (
               <TableCell
                 className={clsx(
