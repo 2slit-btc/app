@@ -56,7 +56,7 @@ const L2Table = ({
 }: FilterTableProps) => {
   const classNames = React.useMemo(
     () => ({
-      wrapper: ['l2s', 'pt-0 pr-1 pl-0', 'shadow-none'],
+      wrapper: ['l2s', 'pt-0 pr-1 pl-0', 'shadow-none', 'rounded-none'],
       thead: ['[&>tr]:first:shadow-none [&>tr>th]:first:py-5'],
       // tr: ['[&>th]:first:rounded-none', '[&>th]:last:rounded-none'],
       th: ['text-default-800', 'text-base font-medium'],
