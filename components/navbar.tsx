@@ -1,5 +1,5 @@
-import { Link } from '@nextui-org/react'
 import {
+  Link,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
@@ -9,10 +9,7 @@ import {
   Navbar as NextUINavbar,
 } from '@nextui-org/react'
 
-import { link as linkStyles } from '@nextui-org/theme'
-
 import { siteConfig } from '@/config/site'
-import clsx from 'clsx'
 import NextLink from 'next/link'
 
 import { GithubIcon } from '@/components/icons'
@@ -26,12 +23,12 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">2slit.btc</p>
+            <Logo size={60} />
+            <p className="font-bold text-3xl">2slit.btc</p>
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.map(item => (
+          {/* {siteConfig.navItems.map(item => (
             <NavbarItem key={item.href}>
               <NextLink
                 className={clsx(
@@ -44,7 +41,7 @@ export const Navbar = () => {
                 {item.label}
               </NextLink>
             </NavbarItem>
-          ))}
+          ))} */}
         </ul>
       </NavbarContent>
 
