@@ -1,6 +1,6 @@
 'use client'
 import type { ColumnSetting, L2 } from '@/types'
-import { formatToUserLocale } from '@/utils/clientUtils'
+import { formatToUserLocale, toMillionWithCommas } from '@/utils/clientUtils'
 import type { Selection } from '@nextui-org/react'
 import {
   Avatar,
@@ -193,13 +193,13 @@ const L2Table = ({
       case 'price_usd':
         return (
           <div className="relative flex justify-end">
-            ${Number(cellValue).toFixed(2)}
+            {Number(cellValue).toFixed(2)}
           </div>
         )
       case 'tvl_price_usd':
         return (
           <div className="relative flex justify-end">
-            ${Number(cellValue).toFixed(2)}
+            {cellValue ? toMillionWithCommas(cellValue) : '-'}
           </div>
         )
       default:

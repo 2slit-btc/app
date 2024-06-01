@@ -30,3 +30,9 @@ export function formatToUserLocale(isoString: string) {
 export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
+
+export function toMillionWithCommas(value: number | string) {
+  const parts = (Number(value) / 1000000).toFixed(2).toString().split('.')
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  return parts.join('.') + ' M'
+}
