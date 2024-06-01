@@ -85,8 +85,10 @@ const TopContent = ({
               onSelectionChange={setStageFilter}
             >
               {stageOptions.map(stage => (
-                <DropdownItem key={stage} className="capitalize">
-                  {capitalize(stage)}
+                <DropdownItem key={stage}>
+                  <span className="capitalize text-base">
+                    {capitalize(stage)}
+                  </span>
                 </DropdownItem>
               ))}
             </DropdownMenu>
@@ -113,7 +115,9 @@ const TopContent = ({
             >
               {columns.map(column => (
                 <DropdownItem key={column.uid} className="capitalize">
-                  {capitalize(column.name)}
+                  <span className="capitalize text-base">
+                    {capitalize(column.name)}
+                  </span>
                 </DropdownItem>
               ))}
             </DropdownMenu>
