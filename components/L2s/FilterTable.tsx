@@ -240,6 +240,7 @@ const L2Table = ({
             {columnKey => (
               <TableCell
                 className={clsx(
+                  'text-nowrap',
                   columnKey === 'native_token_name' && 'max-w-24',
                 )}
               >
