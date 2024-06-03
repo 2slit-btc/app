@@ -57,8 +57,8 @@ const L2Table = ({
   const classNames = React.useMemo(
     () => ({
       wrapper: ['l2s', 'pt-0 pr-1 pl-0', 'shadow-none', 'rounded-none'],
-      thead: ['[&>tr]:first:shadow-none [&>tr>th]:first:py-5'],
-      // tr: ['[&>th]:first:rounded-none', '[&>th]:last:rounded-none'],
+      thead: ['[&>tr]:first:shadow-none [&>tr>th]:first:py-4'],
+      tr: ['[&>th]:first:rounded-none', '[&>th]:last:rounded-none'],
       th: ['text-default-800', 'text-base font-medium'],
       td: [
         'text-base py-3 border-b border-default-200',

@@ -40,6 +40,14 @@
   @apply bg-default-400;
 }
 
+/* remove the clear default button of input */
+input.hide-clear[type="search"]::-webkit-search-decoration,
+input.hide-clear[type="search"]::-webkit-search-cancel-button,
+input.hide-clear[type="search"]::-webkit-search-results-button,
+input.hide-clear[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
 .text-right {
   text-align: right;
 }

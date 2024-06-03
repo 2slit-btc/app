@@ -4,7 +4,6 @@
     "esbenp.prettier-vscode",
     "github.copilot",
     "mikestead.dotenv",
-    "streetsidesoftware.code-spell-checker",
-    "usernamehw.errorlens",
+    "usernamehw.errorlens"
   ]
 }

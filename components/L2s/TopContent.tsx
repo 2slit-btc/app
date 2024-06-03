@@ -7,7 +7,6 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Input,
-  Kbd,
   type Selection,
 } from '@nextui-org/react'
 import type { Key } from 'react'
@@ -37,27 +36,23 @@ const TopContent = ({
 }: TopContentProps) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between gap-3 items-end">
+      <div className="flex justify-between gap-3 items-end flex-wrap">
         {/* search box */}
         <Input
+          type="search"
           aria-label="Search"
           classNames={{
-            // base: 'w-full sm:max-w-[44%]',
+            input: ['hide-clear', 'text-base'],
+            base: 'w-full sm:max-w-[50%]',
             inputWrapper:
               'bg-default-100 relative tap-highlight-transparent shadow-sm px-3 gap-3 data-[hover=true]:bg-default-200 group-data-[focus=true]:bg-default-100 h-10 min-h-10 rounded-medium transition-background motion-reduce:transition-none !duration-150 outline-none :ring-offset-background bg-default-100 border-none',
-            input: 'text-base',
           }}
           startContent={
             <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
           }
-          endContent={
-            <Kbd className="inline-block" keys={['command']}>
-              K
-            </Kbd>
-          }
+          isClearable
           labelPlacement="outside"
           placeholder="Search by name..."
-          size="sm"
           value={filterValue}
           variant="bordered"
           onClear={() => setFilterValue('')}
