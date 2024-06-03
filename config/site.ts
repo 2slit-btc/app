@@ -13,24 +13,7 @@ export const siteConfig = {
     //   href: "/about",
     // }
   ],
-  navMenuItems: [
-    {
-      label: 'Profile',
-      href: '/profile',
-    },
-    {
-      label: 'Dashboard',
-      href: '/dashboard',
-    },
-    {
-      label: 'Projects',
-      href: '/projects',
-    },
-    {
-      label: 'Logout',
-      href: '/logout',
-    },
-  ],
+  navMenuItems: [],
   links: {
     github: 'https://github.com/2slit-btc',
     twitter: 'https://twitter.com/2slit-btc',
